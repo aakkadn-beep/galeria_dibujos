@@ -1,5 +1,4 @@
-```css
-/* Configuración general */
+
 * {
     box-sizing: border-box;
 }
@@ -169,4 +168,38 @@ section ul {
 
 section li {
     margin-bottom: 8px;
+}
+
+/* Diagramas del árbol DOM */
+.diagramas-dom {
+    margin-top: 35px;
+}
+
+.diagrama {
+    margin: 25px 0;
+    padding: 20px;
+    background: #ffffff;
+    border: 1px solid #d5dbea;
+    border-radius: 10px;
+}
+
+.diagrama figure {
+    margin: 15px 0 0;
+}
+
+.diagrama img {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    margin: 0 auto;
+    border: 1px solid #d5dbea;
+    border-radius: 6px;
+}
+
+.diagrama figcaption {
+    margin-top: 10px;
+    text-align: center;
+    color: #46556c;
+    font-size: 0.9rem;
 }
