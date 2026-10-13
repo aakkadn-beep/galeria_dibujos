@@ -130,20 +130,8 @@
 
     </main>
 
+   
     <script>
-        const selector = document.getElementById("pagina");
-        const contenedorArbol = document.getElementById("arbol");
-        const estado = document.getElementById("estado");
-    
-        function actualizarDiagrama() {
-            const diagrama = diagramas[selector.value];
-
-            tituloDiagrama.textContent = diagrama.titulo;
-            imagenDiagrama.src = diagrama.imagen;
-            imagenDiagrama.alt = diagrama.alt;
-            descripcionDiagrama.textContent = diagrama.descripcion;
-        }
-
         function crearRama(elemento) {
             const li = document.createElement("li");
             const etiqueta = document.createElement("span");
@@ -162,7 +150,7 @@
             etiqueta.textContent = `<${nombre}>`;
             li.appendChild(etiqueta);
 
-            // No mostrar el código interno de scripts ni estilos.
+            // No mostrar el contenido interno de scripts ni estilos.
             if (["SCRIPT", "STYLE"].includes(elemento.tagName)) {
                 return li;
             }
@@ -182,13 +170,9 @@
             return li;
         }
 
-        async function mostrarDOM() {
-            async function mostrarDOM() {
-
-    const archivo = selector.value;
-            const archivo = selector.value;
-            contenedorArbol.replaceChildren();
-            estado.textContent = "Cargando estructura...";
+        async function mostrarDOM(archivo, idContenedor) {
+            const contenedor = document.getElementById(idContenedor);
+            contenedor.replaceChildren();
 
             try {
                 const respuesta = await fetch(archivo);
@@ -205,20 +189,15 @@
 
                 const lista = document.createElement("ul");
                 lista.appendChild(crearRama(documento.documentElement));
-                contenedorArbol.appendChild(lista);
-
-                estado.textContent =
-                    `Árbol DOM de ${archivo}. Se muestran las etiquetas HTML y sus relaciones jerárquicas.`;
+                contenedor.appendChild(lista);
             } catch (error) {
-                estado.textContent =
-                    "No se pudo cargar la página. Abre el sitio mediante GitHub Pages o una vista previa de servidor local.";
-                contenedorArbol.textContent =
-                    "Comprueba que el archivo exista y que esté publicado en el mismo sitio.";
+                contenedor.textContent =
+                    "No se pudo cargar el árbol DOM. Comprueba que el archivo esté publicado.";
             }
         }
 
-        selector.addEventListener("change", mostrarDOM);
-        mostrarDOM();
+        mostrarDOM("index.html", "arbol-index");
+        mostrarDOM("dom-inspector.html", "arbol-inspector");
     </script>
 </body>
 </html>
