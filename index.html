@@ -1,0 +1,222 @@
+```html
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Galería de dibujos</title>
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <header>
+        <h1>Galería de dibujos</h1>
+        <p>Explora dibujos creados con código y animación.</p>
+    </header>
+
+    <nav>
+        <a href="#inicio">Inicio</a>
+        <a href="#dibujos">Dibujos</a>
+        <a href="#canvas">HTML Canvas</a>
+        <a href="#p5js">p5.js</a>
+    </nav>
+
+    <main>
+        <section id="inicio">
+            <h2>Bienvenido</h2>
+            <p>En esta página encontrarás una colección de dibujos y
+            explicaciones sobre las herramientas utilizadas para crearlos.</p>
+        </section>
+        <section id="dibujos">
+            <h2>Mis dibujos</h2>
+            <p>Aquí se mostrarán los cinco dibujos del proyecto.</p>
+            <div id="galeria">
+    <div class="controles-dibujos">
+        <button type="button" data-dibujo="rana">Rana</button>
+        <button type="button" data-dibujo="conejo">Dientes de conejo</button>
+        <button type="button" data-dibujo="cena">¿Qué hay de cena?</button>
+        <button type="button" data-dibujo="nieve">Día nevado soleado</button>
+        <button type="button" data-dibujo="muneco">Muñeco de nieve</button>
+    </div>
+
+        <div id="lienzo-dibujo"></div>
+    </div>
+        </section>
+
+        <section id="canvas">
+    <h2>HTML Canvas y el contexto de renderizado 2D</h2>
+
+    <h3>¿Qué es HTML Canvas?</h3>
+    <p>
+        HTML Canvas es un elemento de HTML que permite crear y mostrar
+        gráficos mediante JavaScript. Se utiliza para dibujar figuras,
+        líneas, texto, imágenes y animaciones dentro de un área
+        rectangular de una página web.
+    </p>
+
+    <p>
+        Para utilizarlo, se coloca la etiqueta &lt;canvas&gt; en el
+        documento HTML y se establece su ancho y alto. El elemento
+        funciona como una superficie de dibujo, mientras que JavaScript
+        proporciona las instrucciones para representar los gráficos.
+    </p>
+
+    <h3>¿Qué es el contexto de renderizado 2D?</h3>
+    <p>
+        El contexto de renderizado 2D es una interfaz de JavaScript
+        que permite dibujar sobre un elemento Canvas. Se obtiene
+        mediante el método getContext("2d"), que proporciona
+        herramientas para establecer colores, crear formas y dibujar
+        líneas o texto.
+    </p>
+
+    <h3>Ejemplo de código</h3>
+    <pre><code>&lt;canvas id="miCanvas" width="400" height="200"&gt;
+&lt;/canvas&gt;
+
+&lt;script&gt;
+const canvas = document.getElementById("miCanvas");
+const contexto = canvas.getContext("2d");
+
+contexto.fillStyle = "lightblue";
+contexto.fillRect(20, 20, 150, 80);
+
+contexto.beginPath();
+contexto.arc(250, 60, 40, 0, Math.PI * 2);
+contexto.fillStyle = "orange";
+contexto.fill();
+&lt;/script&gt;</code></pre>
+
+    <h3>Explicación del ejemplo</h3>
+    <ul>
+        <li><strong>&lt;canvas&gt;:</strong> crea el área donde se dibujan los gráficos.</li>
+        <li><strong>getElementById():</strong> permite localizar el lienzo en el documento HTML.</li>
+        <li><strong>getContext("2d"):</strong> obtiene las herramientas de dibujo bidimensional.</li>
+        <li><strong>fillStyle:</strong> establece el color de relleno.</li>
+        <li><strong>fillRect():</strong> dibuja un rectángulo relleno.</li>
+        <li><strong>arc():</strong> define un arco que puede utilizarse para crear un círculo.</li>
+        <li><strong>fill():</strong> rellena la figura definida por el trazado actual.</li>
+    </ul>
+
+    <h3>Ventajas y aplicaciones</h3>
+    <p>
+        Canvas permite crear gráficos personalizados, juegos sencillos,
+        visualizaciones de datos, animaciones y aplicaciones interactivas.
+        Los dibujos se generan mediante instrucciones de código, por lo
+        que pueden modificarse según las necesidades del proyecto.
+    </p>
+
+    <p>
+        En este proyecto se utiliza p5.js para simplificar la creación
+        de los dibujos. Esta biblioteca puede trabajar con un elemento
+        Canvas, aunque ofrece sus propias funciones para facilitar
+        las operaciones gráficas.
+    </p>
+</section>
+
+        <section id="p5js">
+    <h2>La biblioteca p5.js</h2>
+
+    <h3>¿Qué es p5.js?</h3>
+    <p>
+        p5.js es una biblioteca de JavaScript diseñada para facilitar
+        la creación de dibujos, animaciones y experiencias interactivas.
+        Está orientada a la programación creativa y permite representar
+        ideas mediante figuras geométricas, colores, texto e imágenes.
+    </p>
+
+    <p>
+        En lugar de utilizar directamente todos los métodos de Canvas,
+        p5.js proporciona funciones más sencillas para dibujar formas,
+        establecer colores y controlar la ejecución del programa.
+        Esto permite concentrarse en el diseño y el comportamiento
+        de los gráficos.
+    </p>
+
+    <h3>Funciones principales</h3>
+    <ul>
+        <li><strong>setup():</strong> se ejecuta una vez al iniciar el programa y permite preparar el lienzo y sus elementos.</li>
+        <li><strong>draw():</strong> se ejecuta repetidamente para generar los fotogramas de un dibujo o una animación.</li>
+        <li><strong>createCanvas():</strong> crea el área de dibujo y establece sus dimensiones.</li>
+        <li><strong>background():</strong> establece el color de fondo del lienzo.</li>
+        <li><strong>fill():</strong> define el color de relleno de las figuras.</li>
+        <li><strong>ellipse():</strong> dibuja una elipse o un círculo.</li>
+        <li><strong>rect():</strong> dibuja un rectángulo.</li>
+        <li><strong>line():</strong> dibuja una línea entre dos puntos.</li>
+        <li><strong>noStroke():</strong> desactiva el contorno de las figuras.</li>
+    </ul>
+
+    <h3>Ejemplo de código con p5.js</h3>
+    <pre><code>function setup() {
+    createCanvas(400, 300);
+}
+
+function draw() {
+    background(220);
+
+    fill(30, 204, 91);
+    ellipse(200, 150, 150, 100);
+
+    fill(255, 255, 255);
+    ellipse(170, 135, 25, 25);
+    ellipse(230, 135, 25, 25);
+
+    fill(0, 0, 0);
+    ellipse(170, 135, 10, 10);
+    ellipse(230, 135, 10, 10);
+}</code></pre>
+
+    <h3>Explicación del ejemplo</h3>
+    <p>
+        La función setup() crea un lienzo de 400 píxeles de ancho
+        por 300 píxeles de alto. Después, draw() establece el fondo
+        gris y dibuja una figura verde que representa el cuerpo de
+        una rana. Las elipses blancas y negras forman sus ojos.
+    </p>
+
+    <p>
+        Los valores de las funciones indican posiciones, dimensiones
+        y colores. Por ejemplo, ellipse(200, 150, 150, 100) dibuja
+        una elipse centrada en la posición horizontal 200 y vertical
+        150, con un ancho de 150 y un alto de 100 píxeles.
+    </p>
+
+    <h3>¿Cómo se utiliza p5.js en este proyecto?</h3>
+    <p>
+        En esta galería, p5.js se utiliza para crear cinco dibujos:
+        Rana, Dientes de conejo, ¿Qué hay de cena?, Día nevado soleado
+        y Muñeco de nieve. Cada dibujo tiene su propia función de
+        JavaScript y utiliza instrucciones para definir sus figuras,
+        posiciones y colores.
+    </p>
+
+    <p>
+        La función mostrarDibujo() determina qué dibujo debe mostrarse
+        según el botón seleccionado. De esta manera, el usuario puede
+        cambiar entre los dibujos sin tener que abrir una página
+        diferente para cada uno.
+    </p>
+
+    <h3>p5.js y las animaciones</h3>
+    <p>
+        La función draw() se ejecuta repetidamente, lo que permite
+        actualizar las posiciones, los colores y otros valores para
+        producir animaciones. En esta galería, los dibujos son
+        principalmente estáticos, por lo que no es necesario redibujar
+        continuamente sus elementos.
+    </p>
+</section>
+    </main>
+
+    <footer>
+        <p>Proyecto académico de Ingeniería en Sistemas</p>
+    </footer>
+
+    <script src="p5.js"></script>
+<script src="script.js"></script>
+
+</body>
+</html>
+```
