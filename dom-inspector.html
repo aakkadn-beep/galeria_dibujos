@@ -87,20 +87,46 @@
             </div>
         </section>
                 
+        
         <section class="diagramas-dom">
-            <h2 id="tituloDiagrama">Árbol DOM de la página principal</h2>
+            <h2>Diagramas de los árboles DOM</h2>
 
-            <figure class="diagrama">
-                <img
-                    id="imagenDiagrama"
-                    src="imagenes/index.html.png"
-                    alt="Diagrama del árbol DOM de la página principal"
-                >
-                <figcaption id="descripcionDiagrama">
-                    Estructura HTML de la página principal.
-                </figcaption>
-            </figure>
+            <p>
+                Estos diagramas representan la estructura jerárquica
+                de las dos páginas que integran el sitio web.
+            </p>
+
+            <article class="diagrama">
+                <h3>1. Árbol DOM de la página principal</h3>
+
+                <figure>
+                    <img
+                        src="imagenes/index.html.png"
+                        alt="Diagrama del árbol DOM de la página principal index.html"
+                        loading="lazy"
+                    >
+                    <figcaption>
+                        Estructura HTML de la página principal.
+                    </figcaption>
+                </figure>
+            </article>
+
+            <article class="diagrama">
+                <h3>2. Árbol DOM del inspector DOM</h3>
+
+                <figure>
+                    <img
+                        src="imagenes/dom-inspector.png"
+                        alt="Diagrama del árbol DOM de la página dom-inspector.html"
+                        loading="lazy"
+                    >
+                    <figcaption>
+                        Estructura HTML de la página del inspector DOM.
+                    </figcaption>
+                </figure>
+            </article>
         </section>
+
 
     </main>
 
@@ -108,26 +134,7 @@
         const selector = document.getElementById("pagina");
         const contenedorArbol = document.getElementById("arbol");
         const estado = document.getElementById("estado");
-        
-        const imagenDiagrama = document.getElementById("imagenDiagrama");
-        const tituloDiagrama = document.getElementById("tituloDiagrama");
-        const descripcionDiagrama = document.getElementById("descripcionDiagrama");
-
-        const diagramas = {
-            "index.html": {
-                titulo: "Árbol DOM de la página principal",
-                imagen: "imagenes/index.html.png",
-                alt: "Diagrama del árbol DOM de la página principal",
-                descripcion: "Estructura HTML de la página principal."
-            },
-            "dom-inspector.html": {
-                titulo: "Árbol DOM del inspector",
-                imagen: "imagenes/dom-inspector.png",
-                alt: "Diagrama del árbol DOM del inspector",
-                descripcion: "Estructura HTML de la página del inspector DOM."
-            }
-        };
-
+    
         function actualizarDiagrama() {
             const diagrama = diagramas[selector.value];
 
@@ -177,7 +184,6 @@
 
         async function mostrarDOM() {
             async function mostrarDOM() {
-    actualizarDiagrama();
 
     const archivo = selector.value;
             const archivo = selector.value;
