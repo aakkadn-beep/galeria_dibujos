@@ -1,0 +1,170 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inspector del DOM</title>
+    <link rel="stylesheet" href="styles.css">
+
+    <style>
+        .dom-contenedor {
+            max-width: 1100px;
+            margin: 30px auto;
+            padding: 20px;
+        }
+
+        .dom-arbol {
+            margin-top: 20px;
+            padding: 20px;
+            overflow-x: auto;
+            background: #f5f7fb;
+            border: 1px solid #d5dbea;
+            border-radius: 10px;
+            color: #202b3c;
+        }
+
+        .dom-arbol ul {
+            list-style: none;
+            padding-left: 25px;
+            margin: 8px 0;
+            border-left: 2px solid #b9c9e5;
+        }
+
+        .dom-arbol li {
+            margin: 8px 0;
+        }
+
+        .dom-etiqueta {
+            display: inline-block;
+            padding: 5px 9px;
+            background: #dce8fa;
+            border: 1px solid #91addc;
+            border-radius: 5px;
+            font-family: monospace;
+        }
+
+        .dom-info {
+            color: #46556c;
+            font-size: 0.9em;
+            margin-top: 12px;
+        }
+
+        .dom-contenedor select {
+            padding: 8px;
+            margin: 8px;
+            max-width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Inspector del árbol DOM</h1>
+        <p>Explora la estructura HTML de las páginas del sitio.</p>
+    </header>
+
+    <nav>
+        <a href="index.html">Volver a la página principal</a>
+    </nav>
+
+    <main class="dom-contenedor">
+        <section>
+            <h2>Visualización del DOM</h2>
+
+            <label for="pagina">Selecciona una página:</label>
+            <select id="pagina">
+                <option value="index.html">Página principal (index.html)</option>
+                <option value="dom-inspector.html">Inspector DOM (dom-inspector.html)</option>
+            </select>
+
+            <p class="dom-info" id="estado">
+                Selecciona una página para ver su estructura.
+            </p>
+
+            <div id="arbol" class="dom-arbol">
+                El árbol DOM aparecerá aquí.
+            </div>
+        </section>
+    </main>
+
+    <script>
+        const selector = document.getElementById("pagina");
+        const contenedorArbol = document.getElementById("arbol");
+        const estado = document.getElementById("estado");
+
+        function crearRama(elemento) {
+            const li = document.createElement("li");
+            const etiqueta = document.createElement("span");
+            etiqueta.className = "dom-etiqueta";
+
+            let nombre = elemento.tagName.toLowerCase();
+
+            if (elemento.id) {
+                nombre += ` id="${elemento.id}"`;
+            }
+
+            if (elemento.classList && elemento.classList.length > 0) {
+                nombre += ` class="${[...elemento.classList].join(" ")}"`;
+            }
+
+            etiqueta.textContent = `<${nombre}>`;
+            li.appendChild(etiqueta);
+
+            // No mostrar el código interno de scripts ni estilos.
+            if (["SCRIPT", "STYLE"].includes(elemento.tagName)) {
+                return li;
+            }
+
+            const hijos = Array.from(elemento.children);
+
+            if (hijos.length > 0) {
+                const ul = document.createElement("ul");
+
+                hijos.forEach(hijo => {
+                    ul.appendChild(crearRama(hijo));
+                });
+
+                li.appendChild(ul);
+            }
+
+            return li;
+        }
+
+        async function mostrarDOM() {
+            const archivo = selector.value;
+            contenedorArbol.replaceChildren();
+            estado.textContent = "Cargando estructura...";
+
+            try {
+                const respuesta = await fetch(archivo);
+
+                if (!respuesta.ok) {
+                    throw new Error("No se pudo encontrar el archivo.");
+                }
+
+                const html = await respuesta.text();
+                const documento = new DOMParser().parseFromString(
+                    html,
+                    "text/html"
+                );
+
+                const lista = document.createElement("ul");
+                lista.appendChild(crearRama(documento.documentElement));
+                contenedorArbol.appendChild(lista);
+
+                estado.textContent =
+                    `Árbol DOM de ${archivo}. Se muestran las etiquetas HTML y sus relaciones jerárquicas.`;
+            } catch (error) {
+                estado.textContent =
+                    "No se pudo cargar la página. Abre el sitio mediante GitHub Pages o una vista previa de servidor local.";
+                contenedorArbol.textContent =
+                    "Comprueba que el archivo exista y que esté publicado en el mismo sitio.";
+            }
+        }
+
+        selector.addEventListener("change", mostrarDOM);
+        mostrarDOM();
+    </script>
+</body>
+</html>
