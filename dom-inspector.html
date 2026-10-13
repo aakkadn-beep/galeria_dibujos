@@ -68,26 +68,9 @@
         <a href="index.html">Volver a la página principal</a>
     </nav>
 
+    
     <main class="dom-contenedor">
-        <section>
-            <h2>Visualización del DOM</h2>
 
-            <label for="pagina">Selecciona una página:</label>
-            <select id="pagina">
-                <option value="index.html">Página principal (index.html)</option>
-                <option value="dom-inspector.html">Inspector DOM (dom-inspector.html)</option>
-            </select>
-
-            <p class="dom-info" id="estado">
-                Selecciona una página para ver su estructura.
-            </p>
-
-            <div id="arbol" class="dom-arbol">
-                El árbol DOM aparecerá aquí.
-            </div>
-        </section>
-                
-        
         <section class="diagramas-dom">
             <h2>Diagramas de los árboles DOM</h2>
 
@@ -102,7 +85,7 @@
                 <figure>
                     <img
                         src="imagenes/index.html.png"
-                        alt="Diagrama del árbol DOM de la página principal index.html"
+                        alt="Diagrama del árbol DOM de la página principal"
                         loading="lazy"
                     >
                     <figcaption>
@@ -117,7 +100,7 @@
                 <figure>
                     <img
                         src="imagenes/dom-inspector.png"
-                        alt="Diagrama del árbol DOM de la página dom-inspector.html"
+                        alt="Diagrama del árbol DOM del inspector"
                         loading="lazy"
                     >
                     <figcaption>
@@ -127,10 +110,26 @@
             </article>
         </section>
 
+        <section class="dom-interactivo">
+            <h2>Árbol DOM generado automáticamente</h2>
+
+            <p>
+                A continuación se muestra la estructura HTML
+                de cada página del proyecto.
+            </p>
+
+            <h3>Página principal (index.html)</h3>
+            <div id="arbol-index" class="dom-arbol">
+                Cargando árbol DOM...
+            </div>
+
+            <h3>Inspector DOM (dom-inspector.html)</h3>
+            <div id="arbol-inspector" class="dom-arbol">
+                Cargando árbol DOM...
+            </div>
+        </section>
 
     </main>
-
-   
     <script>
         function crearRama(elemento) {
             const li = document.createElement("li");
