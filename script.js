@@ -3,6 +3,17 @@
 let dibujoActual = "rana";
 console.log("Dibujo seleccionado:", dibujoActual);
 
+let sunSize = 30;
+
+let leftX = 123;
+let rightX = 215;
+let sunRadius = 100;
+
+let starX = 106;
+let starY = 28;
+let meteorX = 100;
+let meteorY = 100;
+
 function setup() {
     let lienzo = createCanvas(400, 400);
     lienzo.parent("lienzo-dibujo");
@@ -23,27 +34,42 @@ function setup() {
         });
     });
 }
+
 function mostrarDibujo() {
     background(230, 240, 245);
 
     if (dibujoActual === "rana") {
         dibujarRana();
-   } else if (dibujoActual === "conejo") {
-    console.log("Se seleccionó el conejo");
-    dibujarConejo();
-   } else if (dibujoActual === "cena") {
+    } else if (dibujoActual === "conejo") {
+        dibujarConejo();
+    } else if (dibujoActual === "cena") {
         dibujarCena();
     } else if (dibujoActual === "nieve") {
         dibujarNieve();
-    }
-    else if (dibujoActual === "muneco") {
-    dibujarMuneco();
+    } else if (dibujoActual === "muneco") {
+        dibujarMuneco();
+    } else if (dibujoActual === "sol") {
+        sunSize = 30;
+    } else if (dibujoActual === "nubes") {
+        leftX = 123;
+        rightX = 215;
+        sunRadius = 100;
+    } else if (dibujoActual === "estrella") {
+        starX = 106;
+        starY = 28;
+        meteorX = 100;
+        meteorY = 100;
     }
 }
 
 function draw() {
-    // Los dibujos son estáticos, por lo que no necesitamos
-    // repetir el dibujo en cada fotograma.
+    if (dibujoActual === "sol") {
+        dibujarSol();
+    } else if (dibujoActual === "nubes") {
+        dibujarNubes();
+    } else if (dibujoActual === "estrella") {
+        dibujarEstrella();
+    }
 }
 
 // Dibujo 1: Rana
@@ -162,3 +188,97 @@ function dibujarMuneco() {
     ellipse(200, 133, 90, 90);
 }
 
+// Dibujo: El sol que explota
+function dibujarSol() {
+    background(82, 222, 240);
+    noStroke();
+
+    // Sol que aumenta de tamaño
+    fill(255, 204, 0);
+    ellipse(200, 298, sunSize, sunSize);
+
+    // Suelo verde
+    fill(76, 168, 67);
+    rect(0, 300, 400, 100);
+
+    // Animación del sol
+    sunSize += 1;
+
+    // Reiniciar el tamaño cuando crece demasiado
+    if (sunSize > 300) {
+        sunSize = 30;
+    }
+}
+
+// Dibujo: Nubes que se separan
+function dibujarNubes() {
+    background(184, 236, 255);
+    noStroke();
+
+    // Sol del fondo
+    fill(255, 170, 0);
+    ellipse(200, 100, sunRadius, sunRadius);
+
+    // Nube izquierda
+    fill(255);
+    ellipse(leftX, 150, 126, 97);
+    ellipse(leftX + 62, 150, 70, 60);
+    ellipse(leftX - 62, 150, 70, 60);
+
+    // Nube derecha
+    ellipse(rightX, 100, 126, 97);
+    ellipse(rightX + 62, 100, 70, 60);
+    ellipse(rightX - 62, 100, 70, 60);
+
+    // Las nubes se separan
+    leftX--;
+    rightX++;
+
+    // El sol aumenta de tamaño
+    sunRadius += 2;
+
+    // Reiniciar la animación
+    if (leftX < -100 || rightX > 500) {
+        leftX = 123;
+        rightX = 215;
+        sunRadius = 100;
+    }
+}
+
+// Dibujo: Estrella fugaz
+function dibujarEstrella() {
+    background(29, 40, 115);
+    noStroke();
+
+    // Estrella amarilla
+    fill(255, 242, 0);
+    ellipse(starX, starY, 50, 50);
+
+    // Cuerpo del meteorito
+    fill(150, 126, 126);
+    ellipse(meteorX - 30, meteorY + 120, 70, 70);
+
+    // Detalles de la superficie
+    fill(158, 128, 128);
+    ellipse(meteorX - 8, meteorY + 106, 20, 15);
+    ellipse(meteorX - 47, meteorY + 120, 20, 15);
+    ellipse(meteorX - 17, meteorY + 142, 20, 15);
+
+    // Detalle oscuro
+    fill(0);
+    ellipse(meteorX - 30, meteorY + 95, 10, 5);
+
+    // Movimiento de la estrella y del meteorito
+    starX += 3;
+    starY += 1;
+    meteorX += 1;
+    meteorY += 2;
+
+    // Reiniciar cuando salen del área visible
+    if (starX > 450 || meteorY > 300) {
+        starX = 106;
+        starY = 28;
+        meteorX = 100;
+        meteorY = 100;
+    }
+}
