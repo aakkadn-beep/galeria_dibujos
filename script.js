@@ -9,10 +9,11 @@ let leftX = 123;
 let rightX = 215;
 let sunRadius = 100;
 
-let starX = 106;
-let starY = 28;
-let meteorX = 100;
-let meteorY = 100;
+// Variables de estrella fugaz
+let xPos = 106;
+let yPos = 28;
+let x = 100;
+let y = 100;
 
 function setup() {
     let lienzo = createCanvas(400, 400);
@@ -245,40 +246,27 @@ function dibujarNubes() {
     }
 }
 
-// Dibujo: Estrella fugaz
 function dibujarEstrella() {
     background(29, 40, 115);
-    noStroke();
 
-    // Estrella amarilla
     fill(255, 242, 0);
-    ellipse(starX, starY, 50, 50);
+    ellipse(xPos, yPos, 50, 50); // Estrella
 
-    // Cuerpo del meteorito
     fill(150, 126, 126);
-    ellipse(meteorX - 30, meteorY + 120, 70, 70);
+    ellipse(x - 30, y + 120, 70, 70);
 
-    // Detalles de la superficie
     fill(158, 128, 128);
-    ellipse(meteorX - 8, meteorY + 106, 20, 15);
-    ellipse(meteorX - 47, meteorY + 120, 20, 15);
-    ellipse(meteorX - 17, meteorY + 142, 20, 15);
+    ellipse(x - 8, y + 106, 20, 15);
+    ellipse(x - 47, y + 120, 20, 15);
+    ellipse(x - 17, y + 142, 20, 15);
 
-    // Detalle oscuro
-    fill(0);
-    ellipse(meteorX - 30, meteorY + 95, 10, 5);
+    fill(0, 0, 0);
+    ellipse(x - 30, y + 95, 10, 5);
 
-    // Movimiento de la estrella y del meteorito
-    starX += 3;
-    starY += 1;
-    meteorX += 1;
-    meteorY += 2;
+    // Movimientos originales
+    xPos += 3;
+    yPos++;
 
-    // Reiniciar cuando salen del área visible
-    if (starX > 450 || meteorY > 300) {
-        starX = 106;
-        starY = 28;
-        meteorX = 100;
-        meteorY = 100;
-    }
+    x++;
+    y += 2;
 }
